@@ -3,6 +3,8 @@ import axios from "axios";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import { GoogleLogin } from "@react-oauth/google";
 
+const API_BASE_URL = "https://carbon-footprint-and-credit-management.onrender.com";
+
 function Signup() {
   const [data, setData] = useState({
     name: "",
@@ -14,13 +16,15 @@ function Signup() {
 
   const handleGoogleSignup = async (credentialResponse) => {
   try {
-    const res = await axios.post("http://localhost:5000/api/auth/google", {
+    const res = await axios.post(`${API_BASE_URL}/api/auth/google`, {
       token: credentialResponse.credential,
       role: data.role
     });
 
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("role", res.data.user.role);
+    localStorage.setItem("name", res.data.user.name);
+    localStorage.setItem("picture", res.data.user.picture);
 
     alert("Google Signup Successful!");
     window.location.href = "/dashboard";
@@ -61,7 +65,7 @@ function Signup() {
     try {
       setLoading(true);
 
-      await axios.post("http://localhost:5000/api/auth/register", data);
+      await axios.post(`${API_BASE_URL}/api/auth/register`, data);
 
       alert("Signup successful!");
       window.location.href = "/login";

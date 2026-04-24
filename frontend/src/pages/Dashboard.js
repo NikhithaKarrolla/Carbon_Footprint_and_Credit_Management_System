@@ -14,6 +14,9 @@ import {
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
+const API_BASE_URL = "https://carbon-footprint-and-credit-management.onrender.com";
+const AI_SERVICE_URL = "https://carbon-footprint-and-credit-management.onrender.com";
+
 function Dashboard() {
   const [data, setData] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState("");
@@ -21,7 +24,7 @@ function Dashboard() {
   const role = localStorage.getItem("role");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/emission/all")
+    axios.get(`${API_BASE_URL}/api/emission/all`)
       .then(res => setData(res.data))
       .catch(err => console.log(err));
   }, []);
@@ -44,7 +47,7 @@ function Dashboard() {
         return;
       }
 
-      const res = await axios.post("http://localhost:5001/predict", {
+      const res = await axios.post(`${AI_SERVICE_URL}/api/ai/predict`, {
         emissions
       });
 

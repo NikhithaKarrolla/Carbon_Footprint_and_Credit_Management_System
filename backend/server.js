@@ -7,9 +7,15 @@ require("dotenv").config(); // ✅ Load .env variables
 
 const app = express();
 
-// ✅ Middleware
-app.use(cors());
-app.use(express.json());
+// ✅ CORS Configuration for deployed frontend
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "https://carbon-footprint-and-credit-management.onrender.com"
+  ],
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 // ✅ Routes
 const authRoutes = require("./routes/authRoutes");

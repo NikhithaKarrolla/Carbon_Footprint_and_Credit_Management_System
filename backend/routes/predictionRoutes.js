@@ -2,11 +2,14 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
+// AI Service URL - use environment variable or fallback
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://127.0.0.1:5001";
+
 router.post("/predict", async (req, res) => {
     try {
         const emissions = req.body.emissions;
 
-        const response = await axios.post("http://127.0.0.1:5001/predict", {
+        const response = await axios.post(`${AI_SERVICE_URL}/predict`, {
             emissions: emissions
         });
 

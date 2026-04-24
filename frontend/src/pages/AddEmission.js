@@ -13,6 +13,8 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Legend);
 
+const API_BASE_URL = "https://carbon-footprint-and-credit-management.onrender.com";
+
 function AddEmission() {
 
   const [data, setData] = useState({
@@ -40,7 +42,7 @@ function AddEmission() {
 
       // 1️⃣ Save emission data
       const res = await axios.post(
-        "http://localhost:5000/api/emission/add",
+        `${API_BASE_URL}/api/emission/add`,
         data,
         {
           headers: {
@@ -59,7 +61,7 @@ function AddEmission() {
 
       // 3️⃣ Call prediction API
       const predictionRes = await axios.post(
-        "http://localhost:5000/api/predict",
+        `${API_BASE_URL}/api/ai/predict`,
         {
           emissions: emissionsArray
         }
