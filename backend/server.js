@@ -11,7 +11,8 @@ const app = express();
 const corsOptions = {
   origin: [
     "http://localhost:3000",
-    "https://carbon-footprint-and-credit-management.onrender.com"
+    "https://frontend-e1qs.onrender.com",
+    "https://carbon-footprint-and-credit-management-6wqr.onrender.com"
   ],
   credentials: true
 };
