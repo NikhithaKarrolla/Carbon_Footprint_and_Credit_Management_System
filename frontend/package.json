@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@react-oauth/google": "^0.13.5",
     "@testing-library/dom": "^10.4.1",
