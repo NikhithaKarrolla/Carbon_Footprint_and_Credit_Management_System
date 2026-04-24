@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
@@ -8,6 +9,9 @@ from sklearn.metrics import mean_absolute_error, r2_score
 
 app = Flask(__name__)
 CORS(app)
+
+# ✅ Get port from environment (required for Render)
+PORT = int(os.environ.get("PORT", 5001))
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -50,4 +54,5 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(port=5001, debug=True)
+    # ✅ Bind to 0.0.0.0 for Render deployment
+    app.run(host="0.0.0.0", port=PORT, debug=False)
