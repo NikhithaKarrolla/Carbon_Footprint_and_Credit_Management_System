@@ -3,6 +3,9 @@ from flask_cors import CORS
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
+# ✅ ADDED
+from sklearn.metrics import mean_absolute_error, r2_score
+
 app = Flask(__name__)
 CORS(app)
 
@@ -25,9 +28,22 @@ def predict():
         model = LinearRegression()
         model.fit(X, y)
 
+        # ✅ ADDED METRICS (NO STRUCTURE CHANGE)
+        y_pred = model.predict(X)
+
+        mae = mean_absolute_error(y, y_pred)
+        r2 = r2_score(y, y_pred)
+
+        print("\n📊 MODEL PERFORMANCE")
+        print("MAE:", mae)
+        print("R2 Score:", r2)
+
+        # Original prediction
         next_value = model.predict([[len(emissions)]])[0]
 
-        return jsonify({"prediction": float(next_value)})
+        return jsonify({
+            "prediction": float(next_value)
+        })
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400

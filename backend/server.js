@@ -20,7 +20,7 @@ const predictionRoutes = require("./routes/predictionRoutes");
 
 app.use("/api/auth", authRoutes);
 app.use("/api/emission", emissionRoutes);
-app.use("/api/predict", predictionRoutes)
+app.use("/api/ai", predictionRoutes)
 
 // ✅ MongoDB Connection using .env
 mongoose.connect(process.env.MONGO_URI)
