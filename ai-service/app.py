@@ -13,6 +13,10 @@ CORS(app)
 # ✅ Get port from environment (required for Render)
 PORT = int(os.environ.get("PORT", 5001))
 
+@app.route("/", methods=["GET"])
+def health_check():
+    return jsonify({"status": "AI Service is running"}), 200
+
 @app.route("/predict", methods=["POST"])
 def predict():
     try:

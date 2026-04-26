@@ -10,12 +10,19 @@ app.use(express.json()); // ✅ Parse JSON bodies
 
 // ✅ CORS Configuration for deployed frontend
 const corsOptions = {
-  origin: [
-    "http://localhost:3000",
-    "https://frontend-e1qs.onrender.com",
-    "https://carbon-footprint-and-credit-management-6wqr.onrender.com",
-    "https://carbon-footprint-and-credit-management.onrender.com"
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "https://frontend-e1qs.onrender.com",
+      "https://carbon-footprint-and-credit-management-6wqr.onrender.com",
+      "https://carbon-footprint-and-credit-management.onrender.com"
+    ];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1 || origin.endsWith(".onrender.com")) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 };
 app.use(cors(corsOptions));
