@@ -36,9 +36,10 @@ router.post("/predict", async (req, res) => {
         });
 
     } catch (error) {
+        console.error("AI Service Error:", error.response?.data || error.message);
         res.status(500).json({
             error: "AI service error",
-            details: error.message
+            details: error.response?.data?.error || error.message
         });
     }
 });
