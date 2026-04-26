@@ -6,13 +6,15 @@ const cors = require("cors");
 require("dotenv").config(); // ✅ Load .env variables
 
 const app = express();
+app.use(express.json()); // ✅ Parse JSON bodies
 
 // ✅ CORS Configuration for deployed frontend
 const corsOptions = {
   origin: [
     "http://localhost:3000",
     "https://frontend-e1qs.onrender.com",
-    "https://carbon-footprint-and-credit-management-6wqr.onrender.com"
+    "https://carbon-footprint-and-credit-management-6wqr.onrender.com",
+    "https://carbon-footprint-and-credit-management.onrender.com"
   ],
   credentials: true
 };

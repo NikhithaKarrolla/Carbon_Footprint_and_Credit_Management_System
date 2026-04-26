@@ -28,7 +28,7 @@ function Login() {
 
   } catch (err) {
     console.error(err);
-    alert("Google login failed");
+    alert("Google login failed: " + (err.response?.data?.error || err.message));
   }
 };
 
